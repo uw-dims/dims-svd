@@ -5,6 +5,7 @@ DIMS Software Version Description
 =================================
 
 .. toctree::
+   :numbered:
    :maxdepth: 2
 
 
