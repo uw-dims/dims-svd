@@ -14,11 +14,13 @@
 
 import sys
 import os
+from sphinx import __version__
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, '/opt/dims/etc')
 
 # -- General configuration ------------------------------------------------
 
@@ -31,6 +33,7 @@ import os
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
+    'sphinx.ext.todo',
     'sphinx.ext.intersphinx',
     'sphinx.ext.graphviz',
     'sphinx.ext.ifconfig',
@@ -44,6 +47,9 @@ source_suffix = '.rst'
 
 # The encoding of source files.
 source_encoding = 'utf-8-sig'
+
+# Include todos
+source_include_todos = True
 
 # The master toctree document.
 master_doc = 'index'
@@ -73,7 +79,7 @@ release = version
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = []
+exclude_patterns = ['_build']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -99,11 +105,14 @@ pygments_style = 'sphinx'
 # If true, keep warnings as "system message" paragraphs in the built documents.
 #keep_warnings = False
 
+# If true, `todo` and `todoList` produce output, else they produce nothing.
+todo_include_todos = True
 
 # -- Options for HTML output ----------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
+
 html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -200,9 +209,10 @@ latex_elements = {
 # https://github.com/rtfd/readthedocs.org/issues/416
 #
 'preamble': "".join((
-    '\DeclareUnicodeCharacter{00A0}{ }',  # NO-BREAK SPACE
-    '\DeclareUnicodeCharacter{251C}{+}',  # BOX DRAWINGS LIGHT VERTICAL AND RIGHT
-    '\DeclareUnicodeCharacter{2514}{+}',  # BOX DRAWINGS LIGHT UP AND RIGHT
+    '\DeclareUnicodeCharacter{00A0}{ }',     # NO-BREAK SPACE
+    '\DeclareUnicodeCharacter{2014}{\dash}', # LONG DASH
+    '\DeclareUnicodeCharacter{251C}{+}',     # BOX DRAWINGS LIGHT VERTICAL AND RIGHT
+    '\DeclareUnicodeCharacter{2514}{+}',     # BOX DRAWINGS LIGHT UP AND RIGHT
 )),
 }
 
@@ -229,7 +239,7 @@ latex_logo = 'UW-logo.png'
 #latex_show_urls = False
 
 # Documents to append as an appendix to all manuals.
-#latex_appendices = []
+latex_appendices = ['appendices']
 
 # If false, no module index is generated.
 #latex_domain_indices = True
@@ -271,6 +281,26 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
 
+os.environ['GITBRANCH'] = "develop"
+
+if os.environ.get('DOCSURL') is None:
+    #os.environ['DOCSURL'] = "file://{}".format(os.environ.get('GIT'))
+    os.environ['DOCSURL'] = "http://u12-dev-svr-1.prisem.washington.edu:8080/docs/{}/html".format(
+        os.environ['GITBRANCH'])
+
+intersphinx_cache_limit = -1   # days to keep the cached inventories (0 == forever)
+intersphinx_mapping = {
+        'dimsocd': ("{}/dims-ocd".format(os.environ['DOCSURL']), None),
+        'dimsad': ("{}/dims-ad".format(os.environ['DOCSURL']), None),
+        'dimssr': ("{}/dims-sr".format(os.environ['DOCSURL']), None),
+        'dimsdevguide': ("{}/dims-devguide".format(os.environ['DOCSURL']), None),
+        'dimstp': ("{}/dims-tp".format(os.environ['DOCSURL']), None),
+        'parsonsdocker': ("{}/parsons-docker".format(os.environ['DOCSURL']), None),
+        'dimsdockerfiles': ("{}/dims-dockerfiles".format(os.environ['DOCSURL']), None),
+        'dimspacker': ("{}/dims-packer".format(os.environ['DOCSURL']), None),
+        'dittrich': ('https://staff.washington.edu/dittrich/home/', None),
+        'dimsciutils': ("{}/dims-ci-utils".format(os.environ['DOCSURL']),None)
+}
 
 # -- Options for Epub output ----------------------------------------------
 
