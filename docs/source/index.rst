@@ -4,6 +4,15 @@
 DIMS Software Version Description
 =================================
 
+.. note::
+
+    This is a prototype software version description generated manually for
+    release. In production, this document would be generated regularly as
+    part of the continuous integration/continuous delivery mechanism and
+    would always be kept up-to-date.
+
+..
+
 .. toctree::
    :maxdepth: 2
 
