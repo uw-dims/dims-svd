@@ -63,7 +63,7 @@ copyright = u'2014, 2015 David Dittrich'
 # built documents.
 #
 # The short X.Y version.
-version = '2.1.2'
+version = '1.0.0'
 # The full version, including alpha/beta/rc tags.
 release = version
 
