@@ -25,6 +25,9 @@ DIMS Software Version Description
    rabbitmq.vlan1.dims
    lapp.vlan1.dims
 
+Contact
+-------
+
 .. sectionauthor:: Megan Boggess <mboggess @ u.washington.edu>
 .. sectionauthor:: Dave Dittrich (@davedittrich) <dittrich @ u.washington.edu>
 
